@@ -1,2 +1,2 @@
-# moiveHall
-前端写作
+# CinemaPickSeat
+影院选座项目
