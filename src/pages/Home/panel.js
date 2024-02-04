@@ -197,6 +197,7 @@ const ticketPanel = {
 						"width": 70,
 						"color": "#000000",
 						"fontSize": 12,
+            "lineHeight": "15",
 						"fontFamily": "sans-serif",
 						"fontWeight": "bolder"
 					},
@@ -258,7 +259,7 @@ const ticketPanel = {
 						"left": 100,
 						"top": 130,
 						"height": 10,
-						"width": 70,
+						"width": 75,
             "fontSize": 10,
 						"title": "影厅服务费",
             "fontFamily": "sans-serif",
