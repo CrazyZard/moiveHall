@@ -124,6 +124,8 @@ const ticketPanel = {
 						"width": 45,
 						"testData": "2023-12-28",
 						"field": "today",
+            "dataType": "datetime",
+						"format": "yyyy-MM-dd",
 						"color": "#000000",
 						"fontSize": 12,
 						"fontFamily": "sans-serif",
@@ -239,10 +241,10 @@ const ticketPanel = {
 				},
         {
 					"options": {
-						"left": 100,
+						"left": 95,
 						"top": 105,
 						"height": 10,
-						"width": 75,
+						"width": 80,
 						"title": "影票销售方",
             "field": "seller",
             "data": "黄岩星驰国际影城",
@@ -256,10 +258,10 @@ const ticketPanel = {
 				},
         {
 					"options": {
-						"left": 100,
+						"left": 95,
 						"top": 130,
 						"height": 10,
-						"width": 75,
+						"width": 85,
             "fontSize": 10,
 						"title": "影厅服务费",
             "fontFamily": "sans-serif",

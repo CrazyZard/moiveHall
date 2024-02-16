@@ -12,7 +12,7 @@ function converResDataToPrintData(responseData,info) {
   responseData.map((item) => {
     const printItem = {};
     printItem.hall = info.hall + '号厅' || '';
-    printItem.today = formattedDate;
+    printItem.today = formattedDate + " " + info.time;
     printItem.filmName = info.name;
     printItem.seat = item[0] + '排'+ item[1] + '座';
     printItem.type = info.type;

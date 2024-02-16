@@ -48,6 +48,7 @@ const HomePage: React.FC = () => {
   const [film, setFilm] = useState<string>('');
 
   const [filmOptions, setFilmOptions] = useState<Record<string, any[]>>({});
+  const [totalNum, setTotalNum] = useState<number>(0);
 
   const handleClickSingle = (indexRow: number, indexCol: number) => {
     if (!hall || !film) {
@@ -91,16 +92,17 @@ const HomePage: React.FC = () => {
   };
 
   const handleAfterPrint = (seats: any[]) => {
-    let tempMap = JSON.parse(JSON.stringify(seatMap));;
+    let tempMap = JSON.parse(JSON.stringify(seatMap));
+    // 将 storage 中的数据 转成 number 类型
+    let tempTotalNum = parseInt(storage.get("totalPriceNum")) || 0;
     console.log(seats)
     seats.forEach((seat) => {
       tempMap = tempMap.map((row, rowIndex) =>
-        row.map((col, colIndex) => {   
+        row.map((col, colIndex) => {
           const isCoupleSeat = col.status === 2 && col.type === 'couple';
           const isSingleSeat = col.status === 2 && col.type === 'single';
           const isMatchingCoupleSeat = isCoupleSeat && rowIndex === seat[0] - 1 && col.number.includes(seat[1]);
           const isMatchingSingleSeat = isSingleSeat && rowIndex === seat[0] - 1 && col.number === seat[1];
-    
           if (isMatchingCoupleSeat || isMatchingSingleSeat) {
             return { ...col, status: 3 };
           } else {
@@ -110,6 +112,9 @@ const HomePage: React.FC = () => {
       );
     });
     setSeatMap(tempMap);
+    tempTotalNum = tempTotalNum + seats.length;
+    setTotalNum(tempTotalNum);
+    storage.set("totalPriceNum", tempTotalNum);
     storage.set(film, JSON.stringify(tempMap));
   }
 
@@ -162,7 +167,7 @@ const HomePage: React.FC = () => {
     seatMap.forEach((row, rowIndex) => {
       row.forEach((col) => {
         if (col.status === 2 && col.type === 'single') {
-          tempSelected.push([ rowIndex + 1, col.number ]);
+          tempSelected.push([rowIndex + 1, col.number]);
         }
         if (col.status === 2 && col.type === 'couple') {
           const [s1, s2] = col.number;
@@ -190,6 +195,12 @@ const HomePage: React.FC = () => {
     <div className="container">
       <div className="select-div">
         <div>
+          <span>总票数：</span>
+          <span>{totalNum}</span>
+        </div>
+      </div>
+      <div className="select-div">
+        <div>
           <span>影厅：</span>
           <Select
             style={{ width: '200px' }}
@@ -209,6 +220,7 @@ const HomePage: React.FC = () => {
             }}
             options={filmOptions[hall]}
           ></Select>
+          <span style={{ marginLeft: '12px' }}> </span>
         </div>
         <div className="top-bar">
           <Button
