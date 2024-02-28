@@ -48,7 +48,8 @@ const HomePage: React.FC = () => {
   const [film, setFilm] = useState<string>('');
 
   const [filmOptions, setFilmOptions] = useState<Record<string, any[]>>({});
-  const [totalNum, setTotalNum] = useState<number>(0);
+  let tempTotalNum = parseInt(storage.get("totalPriceNum"));
+  const [totalNum, setTotalNum] = useState<number>(tempTotalNum);
 
   const handleClickSingle = (indexRow: number, indexCol: number) => {
     if (!hall || !film) {
